@@ -8,7 +8,7 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["articulos","cadenas","compras","tiendas","xref_articulos"]
+annotation PBI_QueryOrder = ["articulos","cadenas","compras","tiendas"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -16,7 +16,6 @@ ref table articulos
 ref table cadenas
 ref table compras
 ref table tiendas
-ref table xref_articulos
 
 ref cultureInfo en-US
 

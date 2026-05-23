@@ -18,6 +18,14 @@ table articulos
 
 		annotation SummarizationSetBy = Automatic
 
+	column categoria
+		dataType: string
+		lineageTag: bd56568d-caa3-4894-b853-0f074bc409fd
+		summarizeBy: none
+		sourceColumn: categoria
+
+		annotation SummarizationSetBy = Automatic
+
 	partition articulos = m
 		mode: import
 		source =

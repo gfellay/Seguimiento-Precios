@@ -4,14 +4,14 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 124,
+        "x": 0,
         "y": 0
       },
       "nodes": [
         {
           "location": {
-            "x": 629,
-            "y": 273
+            "x": 442,
+            "y": 249
           },
           "nodeIndex": "articulos",
           "nodeLineageTag": "461c14d2-d344-46f8-a911-67c925daf036",
@@ -38,7 +38,7 @@
         },
         {
           "location": {
-            "x": 568,
+            "x": 427,
             "y": 0
           },
           "nodeIndex": "compras",
@@ -52,8 +52,8 @@
         },
         {
           "location": {
-            "x": 204,
-            "y": 146
+            "x": 124,
+            "y": 151
           },
           "nodeIndex": "tiendas",
           "nodeLineageTag": "f7dffff6-3884-48a9-9493-55db72abe2e6",
@@ -63,19 +63,6 @@
           },
           "zIndex": 4,
           "expandedHeight": 176
-        },
-        {
-          "location": {
-            "x": 1136,
-            "y": 48
-          },
-          "nodeIndex": "xref_articulos",
-          "nodeLineageTag": "ebd0c05a-fc62-439c-b0bf-9b002b77c61d",
-          "size": {
-            "height": 128,
-            "width": 234
-          },
-          "zIndex": 3
         }
       ],
       "name": "All tables",

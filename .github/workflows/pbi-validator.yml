@@ -2,41 +2,65 @@ name: Power BI TMDL Validator
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   validate:
-    runs-on: ubuntu-latest # Más rápido y ligero para Python
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout del Proyecto
         uses: actions/checkout@v4
 
-      - name: Validate TMDL Syntax (Python)
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Validar Proyecto Dinámicamente
         shell: python
         run: |
           import os
           import json
 
-          # 1. Validar que el archivo .pbip sea un JSON válido
-          pbip_path = 'Template.pbip'
+          # 1. Buscar CUALQUIER archivo .pbip de forma dinámica
+          pbip_files = [f for f in os.listdir('.') if f.endswith('.pbip')]
+          if not pbip_files:
+              print("❌ No se encontró ningún archivo .pbip en la raíz.")
+              exit(1)
+          
+          pbip_path = pbip_files[0]
+          print(f"🔍 Validando archivo maestro: {pbip_path}")
+          
           try:
               with open(pbip_path, 'r', encoding='utf-8-sig') as f:
                   json.load(f)
-              print(f"✅ {pbip_path} es un JSON válido.")
+              print("✅ Archivo .pbip es un JSON válido.")
           except Exception as e:
               print(f"❌ Error en {pbip_path}: {e}")
               exit(1)
 
-          # 2. Buscar errores comunes en archivos TMDL (identación)
-          tmdl_folder = 'Template.SemanticModel/definition/tables'
-          for root, dirs, files in os.walk(tmdl_folder):
+          # 2. Buscar la carpeta de tablas dentro de CUALQUIER .SemanticModel
+          tmdl_folder = None
+          for root, dirs, _ in os.walk('.'):
+              if root.endswith('.SemanticModel') and 'definition' in dirs:
+                  tmdl_folder = os.path.join(root, 'definition', 'tables')
+                  break
+
+          if not tmdl_folder or not os.path.exists(tmdl_folder):
+              print("⚠️ No se encontró la carpeta de definiciones TMDL.")
+              exit(0)
+
+          print(f"🔍 Validando sintaxis TMDL en: {tmdl_folder}")
+          for root, _, files in os.walk(tmdl_folder):
               for file in files:
                   if file.endswith('.tmdl'):
                       path = os.path.join(root, file)
                       with open(path, 'r', encoding='utf-8') as f:
-                          lines = f.readlines()
-                          for i, line in enumerate(lines):
-                              # El error más común en TMDL es mezclar espacios y tabs
+                          for i, line in enumerate(f):
                               if line.startswith(' ') and not line.startswith('\t') and line.strip():
-                                  print(f"❌ Error de formato en {file} línea {i+1}: Usa tabulaciones, no espacios.")
+                                  print(f"❌ Error en {file} línea {i+1}: Usa tabulaciones, no espacios.")
                                   exit(1)
-          print("✅ Todos los archivos TMDL tienen formato correcto.")
+          print("✅ Sintaxis TMDL verificada con éxito.")
