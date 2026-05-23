@@ -1,0 +1,48 @@
+name: Auto-Documentation Power BI
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # <--- Agrega esto aquí
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del Proyecto Power BI
+        uses: actions/checkout@v4
+        with:
+          path: main-project # Ponemos el reporte en esta carpeta
+
+      - name: Checkout del Motor Documentador
+        uses: actions/checkout@v4
+        with:
+          repository: gfellay/pbi-tmdl-documenter
+          path: tools # Ponemos tu script en esta carpeta
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependencias
+        run: pip install pandas openpyxl
+
+      - name: Ejecutar Documentador
+        run: |
+          # Entramos a la carpeta del proyecto para que el Excel se genere ahí
+          cd main-project
+          python ../tools/documenter.py .
+          # Movemos el Excel un nivel arriba (a la raíz del runner)
+          mv Documentacion_PBI.xlsx ../
+          cd ..
+
+      - name: Guardar Excel como Artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: Documentacion-Tecnica
+          path: Documentacion_PBI.xlsx # Ahora sí estará aquí
+          retention-days: 30
+
