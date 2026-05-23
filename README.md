@@ -1,45 +1,45 @@
 # Analizador de Tickets de Supermercado
-?? Objetivo
-Construir un historial real de precios basado en tickets propios y analizar su evoluci®Æn.
+## üöÄ Objetivo
+Construir un historial real de precios basado en tickets propios y analizar su evoluci√≥n.
 Proyecto personal para almacenar, normalizar y analizar tickets de compras de distintas cadenas de supermercados utilizando **PostgreSQL** y **Power BI**.
 
-## ?? Estructura de la Base de Datos
+## üóÇ Estructura de la Base de Datos
 
 - **cadenas**: lista de cadenas (Vital, Carrefour, etc.)
 - **tiendas**: sucursales asociadas a cada cadena
-- **articulos**: art®™culos identificados por c®Ædigo del ticket
+- **articulos**: art√≠culos identificados por c√≥digo del ticket
 - **compras**: tabla de hechos con precios, cantidades y fechas
-- **xref_articulos**: tabla manual para unificar c®Ædigos equivalentes entre cadenas
+- **xref_articulos**: tabla manual para unificar c√≥digos equivalentes entre cadenas
 
-## ?? Power BI
+## üìä Power BI
 
 El modelo se conecta directamente a PostgreSQL y permite:
 
 - comparar precios entre cadenas  
-- ver evoluci®Æn hist®Ærica por art®™culo  
+- ver evoluci√≥n hist√≥rica por art√≠culo  
 - analizar variaciones por fecha  
 - detectar ofertas reales  
 
-## ?? Disclaimer
+## ‚ö†Ô∏è Disclaimer
 
 Este proyecto es **personal** y se basa en tickets reales propios.  
-Los datos cargados no representan precios oficiales ni informaci®Æn comercial de ninguna cadena.  
-El repositorio se publica ®≤nicamente con fines educativos y de an®¢lisis personal.
+Los datos cargados no representan precios oficiales ni informaci√≥n comercial de ninguna cadena.  
+El repositorio se publica √∫nicamente con fines educativos y de an√°lisis personal.
 
-## ?? ?Quer®¶s usar este proyecto?
+## üß© ?Quer√©s usar este proyecto?
 
-Si clon®¢s este repositorio, **no vas a tener la base PostgreSQL** con mis datos.  
-Para usar el Power BI o reproducir el modelo, ten®¶s dos opciones:
+Si clon√°s este repositorio, **no vas a tener la base PostgreSQL** con mis datos.  
+Para usar el Power BI o reproducir el modelo, ten√©s dos opciones:
 
-### ? Opci®Æn A °™ Crear tu propia base desde cero
-1. Crear una base PostgreSQL vac®™a  
-2. Crear las tablas manualmente usando los scripts incluidos en el README (m®¢s abajo)  
-3. Cargar tus propios art®™culos y compras (CSV o carga manual)  
+### ‚úî Opci√≥n A - Crear tu propia base desde cero
+1. Crear una base PostgreSQL vac√≠a  
+2. Crear las tablas manualmente usando los scripts incluidos en el README (m√°s abajo)  
+3. Cargar tus propios art√≠culos y compras (CSV o carga manual)  
 4. Abrir el archivo `.pbix`  
-5. Actualizar la conexi®Æn a tu servidor local  
+5. Actualizar la conexi√≥n a tu servidor local  
 
-### ? Opci®Æn B °™ Usar Power BI sin PostgreSQL
-Si no quer®¶s usar PostgreSQL, pod®¶s:
+### ‚úî Opci√≥n B - Usar Power BI sin PostgreSQL
+Si no quer√©s usar PostgreSQL, pod√©s:
 
 - reemplazar las tablas por archivos CSV  
 - usar Power BI en modo **Import**  
@@ -47,7 +47,7 @@ Si no quer®¶s usar PostgreSQL, pod®¶s:
 
 El modelo funciona igual mientras respetes los nombres de las tablas y campos.
 
-## ?? Scripts SQL (para quien quiera recrear la base)
+## üß± Scripts SQL (para quien quiera recrear la base)
 
 ```sql
 CREATE TABLE cadenas (
