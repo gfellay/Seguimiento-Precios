@@ -1,0 +1,33 @@
+/// tabla de referencia cruzada, en caso que un mismo artículo (descripción) se compre en distintas cadenas, lo que hará que cada una tenga su propio código
+table xref_articulos
+	lineageTag: ebd0c05a-fc62-439c-b0bf-9b002b77c61d
+
+	column codigo
+		dataType: string
+		lineageTag: e3c2806d-35ef-43fa-a8ab-e4c1905045f3
+		summarizeBy: none
+		sourceColumn: codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_a_mostrar
+		dataType: string
+		lineageTag: 94c4573f-46f7-40c8-b1ec-c129db2bdd73
+		summarizeBy: none
+		sourceColumn: codigo_a_mostrar
+
+		annotation SummarizationSetBy = Automatic
+
+	partition xref_articulos = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "Pruebas"),
+				    public_xref_articulos = Source{[Schema="public",Item="xref_articulos"]}[Data]
+				in
+				    public_xref_articulos
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

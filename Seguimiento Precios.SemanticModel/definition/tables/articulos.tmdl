@@ -1,0 +1,34 @@
+/// listado de artículos extraídos del ticket de compra. Un mismo artículo podría estar repetido ya que cada cadena maneja su propio código.
+table articulos
+	lineageTag: 461c14d2-d344-46f8-a911-67c925daf036
+
+	column descripcion
+		dataType: string
+		lineageTag: be05dd88-f544-4915-89c7-b0d4c1a71809
+		summarizeBy: none
+		sourceColumn: descripcion
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo
+		dataType: string
+		lineageTag: 785c6e57-85fa-424e-a220-1e420c8d4849
+		summarizeBy: none
+		sourceColumn: codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition articulos = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "Pruebas"),
+				    public_articulos = Source{[Schema="public",Item="articulos"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(public_articulos,{"public.compras"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

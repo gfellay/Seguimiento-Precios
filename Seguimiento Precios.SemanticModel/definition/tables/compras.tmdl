@@ -1,0 +1,77 @@
+/// tabla de hechos. Acá se registra para cada compra la fecha, la tienda, el artículo la cantidad y el precio unitario
+table compras
+	lineageTag: 126c5783-2c0e-48f0-86cb-f3a775f87974
+
+	column id
+		dataType: int64
+		formatString: 0
+		lineageTag: 10e79927-b52e-4073-9e0a-ebd7182a5771
+		summarizeBy: none
+		sourceColumn: id
+
+		annotation SummarizationSetBy = User
+
+	column tienda_id
+		dataType: int64
+		formatString: 0
+		lineageTag: d3e49832-8590-4334-82b8-4e225d18ad26
+		summarizeBy: none
+		sourceColumn: tienda_id
+
+		annotation SummarizationSetBy = User
+
+	column articulo_codigo
+		dataType: string
+		lineageTag: 2f83c586-3a2b-428f-bfdc-a383f96600c3
+		summarizeBy: none
+		sourceColumn: articulo_codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b02a61e3-c7d7-4eb1-be20-0b11ad996a86
+		summarizeBy: none
+		sourceColumn: fecha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column cantidad
+		dataType: double
+		lineageTag: e6679b18-9ddb-4ebe-9b20-6976456e21bb
+		summarizeBy: sum
+		sourceColumn: cantidad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column precio_unit
+		dataType: decimal
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: a7ee9b9f-db85-4375-9528-4a24526734ab
+		summarizeBy: sum
+		sourceColumn: precio_unit
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-AR"}
+
+	partition compras = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "Pruebas"),
+				    public_compras = Source{[Schema="public",Item="compras"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(public_compras,{"public.tiendas", "public.articulos"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"precio_unit", Currency.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

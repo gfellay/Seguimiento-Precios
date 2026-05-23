@@ -1,0 +1,11 @@
+# Extensiones de Power BI tradicionales
+*.pbix
+*.pbit
+
+# Archivos de configuración local y caché de datos
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/unappliedChanges.json
+
+# Carpetas temporales de diagnóstico
+**/temp/
