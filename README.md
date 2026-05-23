@@ -26,7 +26,7 @@ Este proyecto es **personal** y se basa en tickets reales propios.
 Los datos cargados no representan precios oficiales ni información comercial de ninguna cadena.  
 El repositorio se publica únicamente con fines educativos y de análisis personal.
 
-## 🧩 ?Querés usar este proyecto?
+## 🧩 ¿Querés usar este proyecto?
 
 Si clonás este repositorio, **no vas a tener la base PostgreSQL** con mis datos.  
 Para usar el Power BI o reproducir el modelo, tenés dos opciones:
