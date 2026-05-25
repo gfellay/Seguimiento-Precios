@@ -53,9 +53,12 @@ table compras
 
 	column cantidad
 		dataType: double
+		isHidden
 		lineageTag: e6679b18-9ddb-4ebe-9b20-6976456e21bb
 		summarizeBy: sum
 		sourceColumn: cantidad
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 

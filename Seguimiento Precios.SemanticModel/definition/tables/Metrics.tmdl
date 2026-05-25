@@ -1,0 +1,33 @@
+table Metrics
+	lineageTag: 37f24281-6e8b-43f5-8843-74342d044d58
+
+	/// Cantidad comprada
+	measure Qty = CALCULATE(SUM(compras[cantidad]))
+		lineageTag: 186d7a90-d6d2-4d04-ae43-49a12669cdb9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Precio = CALCULATE(AVERAGE(compras[precio_unit]))
+		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
+		lineageTag: f76a225b-f89f-4f46-878a-91b2fe778761
+
+		annotation PBI_FormatHint = {"currencyCulture":"es-AR"}
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 2df74919-490d-46b2-86f7-f28798ef20bf
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Metrics = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 2089b9e273fc4a9aa2024aacf5a3ca83
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

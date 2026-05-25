@@ -2,6 +2,7 @@
 table articulos
 	lineageTag: 461c14d2-d344-46f8-a911-67c925daf036
 
+	/// Unificar esta descripción en caso que un mismo producto se compre en diferentes cadenas.
 	column Descripcion
 		dataType: string
 		lineageTag: be05dd88-f544-4915-89c7-b0d4c1a71809

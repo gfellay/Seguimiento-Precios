@@ -16,6 +16,7 @@ ref table articulos
 ref table compras
 ref table tiendas
 ref table Calendario
+ref table Metrics
 
 ref cultureInfo en-US
 

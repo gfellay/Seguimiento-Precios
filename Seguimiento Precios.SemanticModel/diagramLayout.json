@@ -4,27 +4,26 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 174,
+        "x": 532,
         "y": 0
       },
       "nodes": [
         {
           "location": {
-            "x": 442,
-            "y": 249
+            "x": 410,
+            "y": 317
           },
           "nodeIndex": "articulos",
           "nodeLineageTag": "461c14d2-d344-46f8-a911-67c925daf036",
           "size": {
-            "height": 104,
+            "height": 128,
             "width": 234
           },
-          "zIndex": 1,
-          "expandedHeight": 128
+          "zIndex": 3
         },
         {
           "location": {
-            "x": 427,
+            "x": 274,
             "y": 0
           },
           "nodeIndex": "compras",
@@ -33,22 +32,21 @@
             "height": 152,
             "width": 234
           },
-          "zIndex": 4,
+          "zIndex": 2,
           "expandedHeight": 224
         },
         {
           "location": {
-            "x": 124,
-            "y": 151
+            "x": 37,
+            "y": 163
           },
           "nodeIndex": "tiendas",
           "nodeLineageTag": "f7dffff6-3884-48a9-9493-55db72abe2e6",
           "size": {
-            "height": 104,
+            "height": 176,
             "width": 234
           },
-          "zIndex": 2,
-          "expandedHeight": 176
+          "zIndex": 4
         },
         {
           "location": {
@@ -61,8 +59,20 @@
             "height": 104,
             "width": 234
           },
-          "zIndex": 3,
+          "zIndex": 1,
           "expandedHeight": 272
+        },
+        {
+          "location": {
+            "x": 961,
+            "y": 122.5
+          },
+          "nodeIndex": "Metrics",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "All tables",

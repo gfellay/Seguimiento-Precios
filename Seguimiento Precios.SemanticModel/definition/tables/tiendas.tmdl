@@ -30,6 +30,7 @@ table tiendas
 
 		annotation SummarizationSetBy = Automatic
 
+	/// Asegurar que todas las tiendas tengan al menos una cadena
 	column Cadena
 		dataType: string
 		lineageTag: 0237fe63-7dfa-409c-beee-8fe6aee4e2b3
