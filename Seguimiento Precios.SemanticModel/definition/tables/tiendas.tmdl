@@ -4,35 +4,37 @@ table tiendas
 
 	column id
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 85459b06-703b-4447-ad65-9671a306bcfd
 		summarizeBy: none
 		sourceColumn: id
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = User
 
-	column cadena_id
-		dataType: int64
-		formatString: 0
-		lineageTag: eb6cc64d-d99a-4418-b1f4-e7b1279b9e82
-		summarizeBy: none
-		sourceColumn: cadena_id
-
-		annotation SummarizationSetBy = Automatic
-
-	column nombre
+	column Tienda
 		dataType: string
 		lineageTag: 485d813d-614f-4121-9d16-31c93ab87696
 		summarizeBy: none
-		sourceColumn: nombre
+		sourceColumn: Tienda
 
 		annotation SummarizationSetBy = Automatic
 
-	column direccion
+	column Direccion
 		dataType: string
 		lineageTag: d7011ec2-ccb3-41d7-b753-5e85fcde64ab
 		summarizeBy: none
-		sourceColumn: direccion
+		sourceColumn: Direccion
+
+		annotation SummarizationSetBy = Automatic
+
+	column Cadena
+		dataType: string
+		lineageTag: 0237fe63-7dfa-409c-beee-8fe6aee4e2b3
+		summarizeBy: none
+		sourceColumn: Cadena
 
 		annotation SummarizationSetBy = Automatic
 
@@ -42,7 +44,10 @@ table tiendas
 				let
 				    Source = PostgreSQL.Database("localhost", "Pruebas"),
 				    public_tiendas = Source{[Schema="public",Item="tiendas"]}[Data],
-				    #"Removed Columns" = Table.RemoveColumns(public_tiendas,{"public.compras", "public.cadenas"})
+				    #"Merged Queries" = Table.NestedJoin(public_tiendas, {"cadena_id"}, cadenas, {"id"}, "cadenas", JoinKind.LeftOuter),
+				    #"Expanded cadenas" = Table.ExpandTableColumn(#"Merged Queries", "cadenas", {"nombre"}, {"nombre.1"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Expanded cadenas",{{"nombre.1", "Cadena"}, {"nombre", "Tienda"}, {"direccion", "Direccion"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"public.compras", "public.cadenas", "cadena_id"})
 				in
 				    #"Removed Columns"
 

@@ -2,11 +2,11 @@
 table articulos
 	lineageTag: 461c14d2-d344-46f8-a911-67c925daf036
 
-	column descripcion
+	column Descripcion
 		dataType: string
 		lineageTag: be05dd88-f544-4915-89c7-b0d4c1a71809
 		summarizeBy: none
-		sourceColumn: descripcion
+		sourceColumn: Descripcion
 
 		annotation SummarizationSetBy = Automatic
 
@@ -18,11 +18,11 @@ table articulos
 
 		annotation SummarizationSetBy = Automatic
 
-	column categoria
+	column Categoria
 		dataType: string
 		lineageTag: bd56568d-caa3-4894-b853-0f074bc409fd
 		summarizeBy: none
-		sourceColumn: categoria
+		sourceColumn: Categoria
 
 		annotation SummarizationSetBy = Automatic
 
@@ -32,7 +32,8 @@ table articulos
 				let
 				    Source = PostgreSQL.Database("localhost", "Pruebas"),
 				    public_articulos = Source{[Schema="public",Item="articulos"]}[Data],
-				    #"Removed Columns" = Table.RemoveColumns(public_articulos,{"public.compras"})
+				    #"Renamed Columns" = Table.RenameColumns(public_articulos,{{"descripcion", "Descripcion"}, {"categoria", "Categoria"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"public.compras"})
 				in
 				    #"Removed Columns"
 

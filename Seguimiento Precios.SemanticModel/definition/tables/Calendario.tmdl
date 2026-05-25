@@ -1,0 +1,94 @@
+table Calendario
+	lineageTag: 21866984-917b-41d6-96a5-68dfad033b91
+
+	column Fecha
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 6f706ec3-d4dc-4f1d-a1dc-b68de1a7fca0
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Año
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a881ac0-3e33-40e9-ac97-cb56a3bb7bec
+		summarizeBy: none
+		sourceColumn: Año
+
+		annotation SummarizationSetBy = User
+
+	column Mes
+		dataType: int64
+		formatString: 0
+		lineageTag: 1008d2ea-86de-4fbf-bf51-c00ae5b71f90
+		summarizeBy: none
+		sourceColumn: Mes
+
+		annotation SummarizationSetBy = User
+
+	column NombreMes
+		dataType: string
+		lineageTag: 654f12ca-18cc-443e-98c6-ecae5ec59d44
+		summarizeBy: none
+		sourceColumn: NombreMes
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: e5650aad-a35f-46a8-b4fa-4e88e3d9a882
+		summarizeBy: none
+		sourceColumn: Trimestre
+
+		annotation SummarizationSetBy = User
+
+	column SemanaISO
+		dataType: int64
+		formatString: 0
+		lineageTag: 18af484d-0e3a-41b1-99aa-b0c26cd6e5ee
+		summarizeBy: none
+		sourceColumn: SemanaISO
+
+		annotation SummarizationSetBy = User
+
+	column NombreDía
+		dataType: string
+		lineageTag: 6da99503-9b4a-46c7-a38c-f204104b5be8
+		summarizeBy: none
+		sourceColumn: NombreDía
+
+		annotation SummarizationSetBy = Automatic
+
+	column DíaSemana
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b538e06-2a35-4810-a02b-5da75343627b
+		summarizeBy: none
+		sourceColumn: DíaSemana
+
+		annotation SummarizationSetBy = User
+
+	partition Calendario = m
+		mode: import
+		source =
+				let
+				    fHoy = DateTime.Date(DateTime.LocalNow()),
+				    fMin = List.Min(compras[fecha]),
+				    fDesde = #date(Date.Year(fMin),1,1),
+				    fHasta = #date(Date.Year(fHoy),12,31),
+				
+				    Source = fnCalendario(fDesde, fHasta)
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

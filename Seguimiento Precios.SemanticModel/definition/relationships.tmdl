@@ -1,9 +1,3 @@
-relationship b848394a-0aaa-d6c9-c387-2730b7d7714a
-	crossFilteringBehavior: bothDirections
-	fromCardinality: one
-	fromColumn: tiendas.cadena_id
-	toColumn: cadenas.id
-
 relationship b826dd48-604c-627b-cdcb-cd53dfd9baf1
 	fromColumn: compras.articulo_codigo
 	toColumn: articulos.codigo
@@ -11,4 +5,8 @@ relationship b826dd48-604c-627b-cdcb-cd53dfd9baf1
 relationship adf20dc9-95ab-5b21-fe9c-16488fbc6174
 	fromColumn: compras.tienda_id
 	toColumn: tiendas.id
+
+relationship a6ceba2c-9495-820e-880e-a41a80624830
+	fromColumn: compras.fecha
+	toColumn: Calendario.Fecha
 

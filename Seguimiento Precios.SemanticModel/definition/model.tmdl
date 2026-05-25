@@ -8,14 +8,14 @@ model Model
 
 annotation __PBI_TimeIntelligenceEnabled = 0
 
-annotation PBI_QueryOrder = ["articulos","cadenas","compras","tiendas"]
+annotation PBI_QueryOrder = ["fnCalendario","articulos","cadenas","compras","tiendas","Calendario"]
 
 annotation PBI_ProTooling = ["DevMode"]
 
 ref table articulos
-ref table cadenas
 ref table compras
 ref table tiendas
+ref table Calendario
 
 ref cultureInfo en-US
 

@@ -4,7 +4,7 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 0,
+        "x": 174,
         "y": 0
       },
       "nodes": [
@@ -24,30 +24,16 @@
         },
         {
           "location": {
-            "x": 53,
-            "y": 0
-          },
-          "nodeIndex": "cadenas",
-          "nodeLineageTag": "b6b575b2-b300-45c7-aa6e-aa6914ee1a9b",
-          "size": {
-            "height": 104,
-            "width": 234
-          },
-          "zIndex": 5,
-          "expandedHeight": 128
-        },
-        {
-          "location": {
             "x": 427,
             "y": 0
           },
           "nodeIndex": "compras",
           "nodeLineageTag": "126c5783-2c0e-48f0-86cb-f3a775f87974",
           "size": {
-            "height": 128,
+            "height": 152,
             "width": 234
           },
-          "zIndex": 2,
+          "zIndex": 4,
           "expandedHeight": 224
         },
         {
@@ -58,11 +44,25 @@
           "nodeIndex": "tiendas",
           "nodeLineageTag": "f7dffff6-3884-48a9-9493-55db72abe2e6",
           "size": {
-            "height": 128,
+            "height": 104,
             "width": 234
           },
-          "zIndex": 4,
+          "zIndex": 2,
           "expandedHeight": 176
+        },
+        {
+          "location": {
+            "x": 714,
+            "y": 4.5
+          },
+          "nodeIndex": "Calendario",
+          "nodeLineageTag": "21866984-917b-41d6-96a5-68dfad033b91",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 3,
+          "expandedHeight": 272
         }
       ],
       "name": "All tables",
