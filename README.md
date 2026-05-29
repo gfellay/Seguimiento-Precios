@@ -1,7 +1,7 @@
 # Analizador de Tickets de Supermercado
 ## 🚀 Objetivo
 Construir un historial real de precios basado en tickets propios y analizar su evolución.
-Proyecto personal para almacenar, normalizar y analizar tickets de compras de distintas cadenas de supermercados utilizando **PostgreSQL** y **Power BI**.
+Proyecto personal para almacenar, normalizar y analizar tickets de compras de distintas cadenas de supermercados utilizando **Excel** y **Power BI**.
 
 ## 🗂 Estructura de la Base de Datos
 
