@@ -3,16 +3,15 @@ table tiendas
 	lineageTag: f7dffff6-3884-48a9-9493-55db72abe2e6
 
 	column id
-		dataType: int64
+		dataType: string
 		isHidden
-		formatString: 0
 		lineageTag: 85459b06-703b-4447-ad65-9671a306bcfd
 		summarizeBy: none
 		sourceColumn: id
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = User
+		annotation SummarizationSetBy = Automatic
 
 	column Tienda
 		dataType: string
@@ -43,12 +42,12 @@ table tiendas
 		mode: import
 		source =
 				let
-				    Source = PostgreSQL.Database("localhost", "Pruebas"),
-				    public_tiendas = Source{[Schema="public",Item="tiendas"]}[Data],
-				    #"Merged Queries" = Table.NestedJoin(public_tiendas, {"cadena_id"}, cadenas, {"id"}, "cadenas", JoinKind.LeftOuter),
+				    Source = Excel.Workbook(File.Contents("C:\Users\gfell\OneDrive\Power BI\Seguimiento Precios\BBDD.xlsx"), null, true),
+				    Tiendas_Table = Source{[Item="Tiendas",Kind="Table"]}[Data],
+				    #"Merged Queries" = Table.NestedJoin(Tiendas_Table, {"cadena_id"}, cadenas, {"id"}, "cadenas", JoinKind.LeftOuter),
 				    #"Expanded cadenas" = Table.ExpandTableColumn(#"Merged Queries", "cadenas", {"nombre"}, {"nombre.1"}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Expanded cadenas",{{"nombre.1", "Cadena"}, {"nombre", "Tienda"}, {"direccion", "Direccion"}}),
-				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"public.compras", "public.cadenas", "cadena_id"})
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"cadena_id"})
 				in
 				    #"Removed Columns"
 

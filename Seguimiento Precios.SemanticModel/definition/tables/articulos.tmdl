@@ -2,15 +2,6 @@
 table articulos
 	lineageTag: 461c14d2-d344-46f8-a911-67c925daf036
 
-	/// Unificar esta descripción en caso que un mismo producto se compre en diferentes cadenas.
-	column Descripcion
-		dataType: string
-		lineageTag: be05dd88-f544-4915-89c7-b0d4c1a71809
-		summarizeBy: none
-		sourceColumn: Descripcion
-
-		annotation SummarizationSetBy = Automatic
-
 	column codigo
 		dataType: string
 		lineageTag: 785c6e57-85fa-424e-a220-1e420c8d4849
@@ -19,11 +10,27 @@ table articulos
 
 		annotation SummarizationSetBy = Automatic
 
+	column Descripcion
+		dataType: string
+		lineageTag: 2b54ad8d-6de1-412e-8b9c-49cc9ea674b1
+		summarizeBy: none
+		sourceColumn: Descripcion
+
+		annotation SummarizationSetBy = Automatic
+
 	column Categoria
 		dataType: string
-		lineageTag: bd56568d-caa3-4894-b853-0f074bc409fd
+		lineageTag: e4ab0156-a87d-4b40-9fa4-860055ca00a8
 		summarizeBy: none
 		sourceColumn: Categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'U.M'
+		dataType: string
+		lineageTag: d05a6845-23ce-430f-9cb9-6503edd5218e
+		summarizeBy: none
+		sourceColumn: U.M
 
 		annotation SummarizationSetBy = Automatic
 
@@ -31,12 +38,10 @@ table articulos
 		mode: import
 		source =
 				let
-				    Source = PostgreSQL.Database("localhost", "Pruebas"),
-				    public_articulos = Source{[Schema="public",Item="articulos"]}[Data],
-				    #"Renamed Columns" = Table.RenameColumns(public_articulos,{{"descripcion", "Descripcion"}, {"categoria", "Categoria"}}),
-				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"public.compras"})
+				    Source = Excel.Workbook(File.Contents("C:\Users\gfell\OneDrive\Power BI\Seguimiento Precios\BBDD.xlsx"), null, true),
+				    Articulos_Table = Source{[Item="Articulos",Kind="Table"]}[Data]
 				in
-				    #"Removed Columns"
+				    Articulos_Table
 
 	annotation PBI_NavigationStepName = Navigation
 

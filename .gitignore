@@ -1,6 +1,7 @@
 # Extensiones de Power BI tradicionales
 *.pbix
 *.pbit
+*.xlsx
 
 # Archivos de configuración local y caché de datos
 **/.pbi/localSettings.json

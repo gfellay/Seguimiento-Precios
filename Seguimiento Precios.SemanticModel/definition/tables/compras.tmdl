@@ -2,29 +2,16 @@
 table compras
 	lineageTag: 126c5783-2c0e-48f0-86cb-f3a775f87974
 
-	column id
-		dataType: int64
-		isHidden
-		formatString: 0
-		lineageTag: 10e79927-b52e-4073-9e0a-ebd7182a5771
-		summarizeBy: none
-		sourceColumn: id
-
-		changedProperty = IsHidden
-
-		annotation SummarizationSetBy = User
-
 	column tienda_id
-		dataType: int64
+		dataType: string
 		isHidden
-		formatString: 0
 		lineageTag: d3e49832-8590-4334-82b8-4e225d18ad26
 		summarizeBy: none
 		sourceColumn: tienda_id
 
 		changedProperty = IsHidden
 
-		annotation SummarizationSetBy = User
+		annotation SummarizationSetBy = Automatic
 
 	column articulo_codigo
 		dataType: string
@@ -65,11 +52,14 @@ table compras
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column precio_unit
-		dataType: decimal
+		dataType: double
+		isHidden
 		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
 		lineageTag: a7ee9b9f-db85-4375-9528-4a24526734ab
 		summarizeBy: sum
 		sourceColumn: precio_unit
+
+		changedProperty = IsHidden
 
 		annotation SummarizationSetBy = Automatic
 
@@ -79,10 +69,9 @@ table compras
 		mode: import
 		source =
 				let
-				    Source = PostgreSQL.Database("localhost", "Pruebas"),
-				    public_compras = Source{[Schema="public",Item="compras"]}[Data],
-				    #"Removed Columns" = Table.RemoveColumns(public_compras,{"public.tiendas", "public.articulos"}),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns",{{"precio_unit", Currency.Type}})
+				    Source = Excel.Workbook(File.Contents("C:\Users\gfell\OneDrive\Power BI\Seguimiento Precios\BBDD.xlsx"), null, true),
+				    Compras_Table = Source{[Item="Compras",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Compras_Table,{{"fecha", type date}, {"cantidad", type number}, {"precio_unit", type number}})
 				in
 				    #"Changed Type"
 

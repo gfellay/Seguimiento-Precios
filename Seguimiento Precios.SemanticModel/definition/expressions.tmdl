@@ -43,11 +43,10 @@ expression fnCalendario = ```
 /// Para agrupar las tiendas (en caso que se hagan compras en más de una tienda para una cadena)
 expression cadenas =
 		let
-		    Source = PostgreSQL.Database("localhost", "Pruebas"),
-		    public_cadenas = Source{[Schema="public",Item="cadenas"]}[Data],
-		    #"Removed Columns" = Table.RemoveColumns(public_cadenas,{"public.tiendas"})
+		    Source = Excel.Workbook(File.Contents("C:\Users\gfell\OneDrive\Power BI\Seguimiento Precios\BBDD.xlsx"), null, true),
+		    Cadenas_Table = Source{[Item="Cadenas",Kind="Table"]}[Data]
 		in
-		    #"Removed Columns"
+		    Cadenas_Table
 	lineageTag: b764d304-ef99-4d43-b56d-0874a903fde3
 
 	annotation PBI_NavigationStepName = Navigation

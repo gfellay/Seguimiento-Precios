@@ -7,11 +7,20 @@ table Metrics
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure Precio = CALCULATE(AVERAGE(compras[precio_unit]))
+	measure Monto =
+			CALCULATE(
+			            SUMX(compras,
+			                compras[cantidad] * compras[precio_unit]
+			            )
+			        )
 		formatString: \$\ #,0.###############;-\$\ #,0.###############;\$\ #,0.###############
 		lineageTag: f76a225b-f89f-4f46-878a-91b2fe778761
 
 		annotation PBI_FormatHint = {"currencyCulture":"es-AR"}
+
+	measure $_Kg = DIVIDE([Monto], [Qty])
+		formatString: #,0.00
+		lineageTag: 998eed8a-a4b2-41a9-b8ce-e5e410932686
 
 	column Column
 		isHidden
